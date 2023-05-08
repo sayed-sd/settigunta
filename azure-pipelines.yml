@@ -1,24 +1,21 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
+# Builds are automatically triggered from the master branch in the 'practical-yaml-build-pipe' Repo.
 trigger:
 - master
 
-jobs:
-- job: build
-  displayName: Build job
-  # Define the steps for the build job here
-  # ...
+pool:
+  # Using a Microsoft Hosted Agent - https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops
+  vmImage: ubuntu-18.04
 
-- job: create_tag
-  displayName: Create Git tag
-  dependsOn: build
-  condition: failed()
-  steps:
-  - script: |
-      git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
-      git push --tags
-    displayName: Create and push Git tag
+steps:
 
+# Azure CLI Task - creating the 'practical-yaml' Resource Group.
+- task: AzureCLI@1
+  displayName: 'Create practical-yaml Resource Group'
+  inputs:
+    # Using Service Principal, 'sp-az-build-pipeline', to authenticate to the Azure Subscription.
+    azureSubscription: 'sp-az-build-pipeline'
+    scriptLocation: inlineScript
+    inlineScript: |
+     az group create \
+     --name practical-yaml \
+     --location westeurope
