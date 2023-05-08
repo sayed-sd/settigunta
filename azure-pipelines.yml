@@ -15,7 +15,7 @@ jobs:
 - job: create_tag
   displayName: Create Git tag
   dependsOn: build
-  condition: succeeded()
+  condition: failed()
   steps:
   - script: |
       git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
