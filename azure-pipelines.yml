@@ -6,14 +6,19 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
+jobs:
+- job: build
+  displayName: Build job
+  # Define the steps for the build job here
+  # ...
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- job: create_tag
+  displayName: Create Git tag
+  dependsOn: build
+  condition: succeeded()
+  steps:
+  - script: |
+      git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
+      git push --tags
+    displayName: Create and push Git tag
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
