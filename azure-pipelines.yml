@@ -21,6 +21,6 @@ jobs:
           previous_tag=$(git describe --abbrev=0 HEAD^)
           echo "Latest tag: $latest_tag"
           echo "Previous tag: $previous_tag"
-          git log --oneline --pretty=format:"%h %s" $previous_tag..$latest_tag
+          git log --oneline --pretty=format:"%h %s" $previous_tag...$latest_tag
 
      # displayName: Create and push Git tag
