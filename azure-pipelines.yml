@@ -10,8 +10,6 @@ trigger:
 jobs:
 - job: create_tag
   displayName: Create Git tag
-  dependsOn: build
-  condition: succeeded()
   steps:
   - script: |
       git config --global user.email "sayedcaptain70@gmail.com"
