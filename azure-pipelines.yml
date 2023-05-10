@@ -18,7 +18,7 @@ jobs:
           git push origin --tags
           git fetch --tags
           latest_tag=$(git describe --abbrev=0)
-          previous_commit=$(git rev-parse HEAD^)
+          previous_commit=$(git rev-parse HEAD~1)
           previous_tag=$(git describe --abbrev=0 $previous_commit)
           echo "Latest tag: $latest_tag"
           echo "Previous tag: $previous_tag"
