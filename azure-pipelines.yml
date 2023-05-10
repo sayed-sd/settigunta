@@ -4,15 +4,25 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
-
-
-jobs:
-- job: create_tag
-  displayName: Create Git tag
-  steps:
-   tags:
+  branches:
+    include:
+    - main
+  tags:
     include:
     - 'release-*'
-  
- 
+
+pool:
+  vmImage: windows-latest
+
+jobs:
+- job: A
+  displayName: 'JobA'
+  steps:
+  . . .
+
+# JobB only runs when the pipeline is triggered by the tags like as the format 'release-xxx'.
+- job: B
+  displayName: 'JobB'
+  condition: contains(variables['Build.SourceBranch'], 'refs/tags/release-')
+  steps:
+  ...
