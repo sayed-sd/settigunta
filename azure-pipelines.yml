@@ -16,6 +16,7 @@ jobs:
           git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
           #      git push --tags https://$(GIT_USERNAME):$(PAT)@github.com/sayed-sd/settigunta
           git push origin --tags
+          git fetch --tags --depth=2
           latest_tag=$(git describe --abbrev=0)
           previous_tag=$(git describe --abbrev=0 HEAD^)
           echo "Latest tag: $latest_tag"
