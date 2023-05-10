@@ -3,26 +3,15 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-  branches:
-    include:
-    - main
-  tags:
-    include:
-    - 'release-*'
+ checkout: self
+  persistCredentials: true
+  clean: true
 
-pool:
-  vmImage: windows-latest
-
-jobs:
-- job: A
-  displayName: 'JobA'
-  steps:
-  . . .
-
-# JobB only runs when the pipeline is triggered by the tags like as the format 'release-xxx'.
-- job: B
-  displayName: 'JobB'
-  condition: contains(variables['Build.SourceBranch'], 'refs/tags/release-')
-  steps:
-  ...
+# GIT tag from YAML pipeline
+# Tag the current branch with the version number
+- script: |
+    git tag $(resources.pipeline.MyBuild.runName)
+    git push origin $(resources.pipeline.MyBuild.runName)
+  workingDirectory: $(Build.SourcesDirectory)
+  displayName: Git Commit and Tag from pipeline
+  continueOnError: true
