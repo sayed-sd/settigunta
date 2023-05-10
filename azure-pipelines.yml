@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+
+jobs:
+- job: build
+  displayName: Build job
+  # Define the steps for the build job here
+  # ...
+  steps:
+    - checkout: none
+    - script: echo Hello, world!
+
+  
+
+- job: create_tag
+  displayName: Create Git tag
+  dependsOn: build
+  condition: succeeded()
+  steps:
+  - script: |
+      git config --global user.email "sayedcaptain70@gmail.com"
+      git config --global user.name "sayed-sd"
+      echo "machine github.com login $(PAT)" >> .git/credentials
+      git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
+      git push --tags https://$(GIT_USERNAME):$(PAT)@github.com/sayed-hub/settigunta
+
+    displayName: Create and push Git tag
