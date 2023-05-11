@@ -29,6 +29,6 @@ jobs:
           cat changelog.txt
           git add changelog.txt
           git commit -m "Update changelog"
-          git push origin
+          git push origin HEAD:master
 
      # displayName: Create and push Git tag
