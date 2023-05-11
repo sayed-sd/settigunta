@@ -23,3 +23,8 @@ jobs:
       echo "Changelog:"
       echo "$changelog" > changelog.txt
       cat changelog.txt
+        - task: PublishPipelineArtifact@1
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'changelog.txt'
+      artifactName: 'changelog'
