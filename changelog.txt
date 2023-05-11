@@ -1,2 +1,2 @@
-41cbbab - Update anju.txt (sayed)
-M	anju.txt
+865ab14 - Update changelog (sayed-sd)
+M	changelog.txt
