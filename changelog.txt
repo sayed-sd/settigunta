@@ -1,2 +1,2 @@
-3d0a83e - Update changelog (sayed-sd)
-A	changelog.txt
+117f507 - Update changelog (sayed-sd)
+M	changelog.txt
