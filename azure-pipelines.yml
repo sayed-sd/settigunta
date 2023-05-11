@@ -24,8 +24,7 @@ jobs:
           echo "$changelog" > changelog.txt
           cat changelog.txt
 
-          - name: Upload Changelog
-            uses:actions/upload-artifact@v2
-            with:
-            name:changelog
-              path:changelog.txt
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(Pipeline.Workspace)/changelog.txt'
+          artifact: 'changelog'
