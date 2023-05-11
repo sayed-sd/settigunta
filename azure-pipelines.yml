@@ -1,17 +1,25 @@
 trigger:
   branches:
     include:
-      - master
-  paths:
-    exclude:
-      - changelog.txt
-
+      - main
 jobs:
 - job: create_tag
   displayName: Create Git tag
   steps:
   - checkout: self
     persistCredentials: true
-  - template: create-tag-script-template.yml
-    parameters:
-      buildNumber: $(Build.BuildNumber)
+  - script: |
+      git config --global user.email "sayed.ahammad1@hp.com"
+      git config --global user.name "sayed-ahammad1"
+      git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
+      git push origin --tags
+      git fetch --tags
+      latest_tag=$(git describe --abbrev=0)
+      previous_tag=$(git describe --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1))
+      echo "Latest tag: $latest_tag"
+      echo "Previous tag: $previous_tag"
+      #git diff --name-only $previous_tag..$latest_tag > changelog.txt
+      changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
+      echo "Changelog:"
+      echo "$changelog" > changelog.txt
+      cat changelog.txt
