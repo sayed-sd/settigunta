@@ -27,7 +27,5 @@ jobs:
           echo "Changelog:"
           echo "$changelog" > changelog.txt
           cat changelog.txt
-          git add changelog.txt
-          git commit -m "Update changelog"
-          git push origin HEAD:master
+
 
