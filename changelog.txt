@@ -1,0 +1,2 @@
+fe2163a - Update azure-pipelines.yml for Azure Pipelines (sayed)
+M	azure-pipelines.yml
