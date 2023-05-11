@@ -1,7 +1,7 @@
 trigger:
   branches:
     include:
-      - main
+      - master
 jobs:
 - job: create_tag
   displayName: Create Git tag
