@@ -1,2 +1,3 @@
-3509dea - Update azure-pipelines.yml for Azure Pipelines (sayed)
-M	azure-pipelines.yml
+01cf8aa - Update sayed.txt (sayed)
+M	changelog.txt
+M	sayed.txt
