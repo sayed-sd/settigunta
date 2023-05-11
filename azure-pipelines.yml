@@ -27,70 +27,8 @@ jobs:
           echo "Changelog:"
           echo "$changelog" > changelog.txt
           cat changelog.txt
-          trigger:
-- master
-
-
-
-jobs:
-- job: create_tag
-  displayName: Create Git tag
-  steps:
-  - checkout: self
-    persistCredentials: true
-  - script: |
-          git config --global user.email "sayedcaptain70@gmail.com"
-          git config --global user.name "sayed-sd"
-          #      echo "machine github.com login $(PAT)" >> .git/credentials
-          git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
-          #      git push --tags https://$(GIT_USERNAME):$(PAT)@github.com/sayed-sd/settigunta
-          git push origin --tags
-          git fetch --tags
-          latest_tag=$(git describe --abbrev=0)
-          previous_tag=$(git describe --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1))
-          echo "Latest tag: $latest_tag"
-          echo "Previous tag: $previous_tag"
-          git diff --name-only $previous_tag..$latest_tag
-          changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
-          #changelog=$(git log --pretty=format:"- %s" $previous_tag..$latest_tag)
-          echo "Changelog:"
-          echo "$changelog" > changelog.txt
-          cat changelog.txt
-          trigger:
-- master
-
-
-
-jobs:
-- job: create_tag
-  displayName: Create Git tag
-  steps:
-  - checkout: self
-    persistCredentials: true
-  - script: |
-          git config --global user.email "sayedcaptain70@gmail.com"
-          git config --global user.name "sayed-sd"
-          #      echo "machine github.com login $(PAT)" >> .git/credentials
-          git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
-          #      git push --tags https://$(GIT_USERNAME):$(PAT)@github.com/sayed-sd/settigunta
-          git push origin --tags
-          git fetch --tags
-          latest_tag=$(git describe --abbrev=0)
-          previous_tag=$(git describe --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1))
-          echo "Latest tag: $latest_tag"
-          echo "Previous tag: $previous_tag"
-          git diff --name-only $previous_tag..$latest_tag
-          changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
-          #changelog=$(git log --pretty=format:"- %s" $previous_tag..$latest_tag)
-          echo "Changelog:"
-          echo "$changelog" > changelog.txt
-          cat changelog.txt
           git add changelog.txt
           git commit -m "Update changelog"
           git push origin
-
-     # displayName: Create and push Git tag
-
-     # displayName: Create and push Git tag
 
      # displayName: Create and push Git tag
