@@ -31,4 +31,3 @@ jobs:
           git commit -m "Update changelog"
           git push origin HEAD:master
 
-     # displayName: Create and push Git tag
