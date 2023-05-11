@@ -18,14 +18,4 @@ jobs:
       echo "Latest tag: $latest_tag"
       echo "Previous tag: $previous_tag"
       git diff --name-only $previous_tag..$latest_tag > changes.txt
-      if [[ -s "changes.txt" ]]; then
-        changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
-        echo "Changelog:"
-        echo "$changelog" > changelog.txt
-        cat changelog.txt
-        git add changelog.txt
-        git commit -m "Update changelog"
-        git push origin HEAD:master
-      else
-        echo "No changes detected. Skipping the job."
-      fi
+
