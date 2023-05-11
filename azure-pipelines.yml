@@ -29,5 +29,5 @@ jobs:
           cat changelog.txt
           git add changelog.txt
           git commit -m "Update changelog"
-          git push origin HEAD:mster
+          git push origin HEAD:master
 
