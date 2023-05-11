@@ -1,2 +1,2 @@
-717c7e8 - Update changelog (sayed-sd)
+f150dc4 - Update changelog (sayed-sd)
 M	changelog.txt
