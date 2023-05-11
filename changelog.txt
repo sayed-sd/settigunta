@@ -1,2 +1,2 @@
-910365f - Update azure-pipelines.yml for Azure Pipelines (sayed)
-M	azure-pipelines.yml
+5c423f4 - Update changelog (sayed-sd)
+M	changelog.txt
