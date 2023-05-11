@@ -22,7 +22,8 @@ jobs:
           echo "Latest tag: $latest_tag"
           echo "Previous tag: $previous_tag"
           git diff --name-only $previous_tag..$latest_tag
-          changelog=$(git log --pretty=format:"- %s" $previous_tag..$latest_tag)
+          changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
+          #changelog=$(git log --pretty=format:"- %s" $previous_tag..$latest_tag)
           echo "Changelog:"
           echo "$changelog" > changelog.txt
           cat changelog.txt
