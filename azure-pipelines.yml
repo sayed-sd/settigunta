@@ -1,7 +1,8 @@
 trigger:
 - master
 
-
+pool:
+  name: CodeWayAWSLinux
 
 jobs:
 - job: create_tag
