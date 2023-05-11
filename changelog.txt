@@ -1,2 +1,2 @@
-7395793 - Update changelog (sayed-sd)
+28c3722 - Update changelog (sayed-sd)
 M	changelog.txt
