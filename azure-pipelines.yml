@@ -15,13 +15,14 @@ jobs:
       git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
       git push origin --tags
       git fetch --tags
-      tags=$(git tag --sort=-v:refname)  # Retrieve all tags sorted in descending order
+      tags=$(git tag)
       previous_tag=""
       for tag in $tags; do
-        if [ -z "$previous_tag" ]; then
-          previous_tag=$tag
-        else
+        if [ -n "$previous_tag" ]; then
           break
+        fi
+        if [ "$tag" != "$(Build.BuildNumber)" ]; then
+          previous_tag=$tag
         fi
       done
       changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff $previous_tag..$(Build.BuildNumber))")
