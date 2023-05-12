@@ -18,12 +18,10 @@ jobs:
       tags=$(git tag)
       previous_tag=""
       for tag in $tags; do
-        if [ -n "$previous_tag" ]; then
+        if [ "$tag" = "$(Build.BuildNumber)" ]; then
           break
         fi
-        if [ "$tag" != "$(Build.BuildNumber)" ]; then
-          previous_tag=$tag
-        fi
+        previous_tag=$tag
       done
       changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff $previous_tag..$(Build.BuildNumber))")
       echo "$changelog" > changelog.txt
