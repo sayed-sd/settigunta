@@ -17,11 +17,12 @@ jobs:
       git fetch --tags
       latest_tag=$(git describe --abbrev=0)
       previous_tag=$(git describe --abbrev=0 $(git rev-list --tags --skip=1 --max-count=1))
-      echo "Latest tag: $latest_tag"
-      echo "Previous tag: $previous_tag"
+      #echo "Latest tag: $latest_tag"
+      #echo "Previous tag: $previous_tag"
       #git diff --name-only $previous_tag..$latest_tag > changelog.txt
-      changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
-      echo "Changelog:"
+      #changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff --name-status $previous_tag..$latest_tag)")
+      changelog=$(git log --pretty=format:"%h - %s (%an)%n$(git diff  $previous_tag..$latest_tag)")
+      #echo "Changelog:"
       echo "$changelog" > changelog.txt
       cat changelog.txt
   - task: PublishPipelineArtifact@1
