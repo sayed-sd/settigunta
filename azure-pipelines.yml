@@ -10,7 +10,7 @@ jobs:
   - checkout: self
     persistCredentials: true
   - script: |
-      #git config --global user.email "sayedcaptain70@gmail.com"
+      git config --global user.email "sayedcaptain70@gmail.com"
       git config --global user.name "sayed-sd"
       git tag -a $(Build.BuildNumber) -m "Build passed for $(Build.SourceBranchName)"
       git push origin --tags
